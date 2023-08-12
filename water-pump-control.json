@@ -1,0 +1,459 @@
+[
+    {
+        "id": "f75bcd0577299bfb",
+        "type": "tab",
+        "label": "Good*Stuff",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "886b19400545e6b6",
+        "type": "comment",
+        "z": "f75bcd0577299bfb",
+        "name": "Water pump control",
+        "info": "See [Big Timer usage](https://tech.scargill.net/big-timer/)",
+        "x": 590,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "a961d8a26cb982ad",
+        "type": "api-current-state",
+        "z": "f75bcd0577299bfb",
+        "name": "Barrel not full",
+        "server": "8a5489af1f40ec89",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "binary_sensor.rain_watertank_full_contact",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "ceiling_toggle",
+                "valueType": "str"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "seconds",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 590,
+        "y": 260,
+        "wires": [
+            [
+                "67e7d479a45f9e25"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "67e7d479a45f9e25",
+        "type": "api-call-service",
+        "z": "f75bcd0577299bfb",
+        "d": true,
+        "name": "Pump On",
+        "server": "8a5489af1f40ec89",
+        "version": 5,
+        "debugenabled": true,
+        "domain": "switch",
+        "service": "turn_on",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "switch.shelly1_e8db84a215c6"
+        ],
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 820,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e4628d9588b5b90a",
+        "type": "api-call-service",
+        "z": "f75bcd0577299bfb",
+        "d": true,
+        "name": "Pump Off",
+        "server": "8a5489af1f40ec89",
+        "version": 5,
+        "debugenabled": true,
+        "domain": "switch",
+        "service": "turn_off",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "switch.shelly1_e8db84a215c6"
+        ],
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 820,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ee65ca5f3ef42c5c",
+        "type": "delay",
+        "z": "f75bcd0577299bfb",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 440,
+        "wires": [
+            [
+                "e4628d9588b5b90a"
+            ]
+        ]
+    },
+    {
+        "id": "eb44e334cd550a97",
+        "type": "server-state-changed",
+        "z": "f75bcd0577299bfb",
+        "name": "Barrel full",
+        "server": "8a5489af1f40ec89",
+        "version": 4,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "binary_sensor.rain_watertank_full_contact",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "5",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "e4628d9588b5b90a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1b97edd51dfe7b6c",
+        "type": "server-state-changed",
+        "z": "f75bcd0577299bfb",
+        "name": "Barrel empty",
+        "server": "8a5489af1f40ec89",
+        "version": 4,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "binary_sensor.rain_watertank_empty_contact",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "30",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 350,
+        "y": 240,
+        "wires": [
+            [
+                "a961d8a26cb982ad",
+                "db8d636b74290ebc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "93dd952be3cf17c8",
+        "type": "server-state-changed",
+        "z": "f75bcd0577299bfb",
+        "name": "Pump On",
+        "server": "8a5489af1f40ec89",
+        "version": 4,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "switch.shelly1_e8db84a215c6",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 360,
+        "y": 420,
+        "wires": [
+            [
+                "ee65ca5f3ef42c5c",
+                "a60b5057942db94f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "7f38d21210127840",
+        "type": "server-state-changed",
+        "z": "f75bcd0577299bfb",
+        "name": "Pump Off",
+        "server": "8a5489af1f40ec89",
+        "version": 4,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "switch.shelly1_e8db84a215c6",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "seconds",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "reset",
+                "propertyType": "msg",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "x": 360,
+        "y": 480,
+        "wires": [
+            [
+                "ee65ca5f3ef42c5c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a60b5057942db94f",
+        "type": "api-call-service",
+        "z": "f75bcd0577299bfb",
+        "name": "N: Pump On",
+        "server": "8a5489af1f40ec89",
+        "version": 5,
+        "debugenabled": false,
+        "domain": "notify",
+        "service": "notify",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [],
+        "data": "{\"message\":\"Waterpump On\"}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 590,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "db8d636b74290ebc",
+        "type": "api-call-service",
+        "z": "f75bcd0577299bfb",
+        "name": "N: Barrel empty",
+        "server": "8a5489af1f40ec89",
+        "version": 5,
+        "debugenabled": false,
+        "domain": "notify",
+        "service": "notify",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [],
+        "data": "{\"message\":\"Barrel empty\"}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 600,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8a5489af1f40ec89",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 5,
+        "addon": false,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": "30",
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": "at: ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "h23",
+        "statusTimeFormat": "h:m",
+        "enableGlobalContextStore": true
+    }
+]
