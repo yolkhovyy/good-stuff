@@ -1,4 +1,4 @@
 # good*stuff companion repository
 
-* [Waterpump pump control](./diy-smart-rain-water-barrel/)
-  * [Node-RED flow](./diy-smart-rain-water-barrel/water-pump-control.json)
+* [DIY Smart rain water barrel](./diy-smart-rain-water-barrel/)
+  * [Node-RED flow - water pump control](./diy-smart-rain-water-barrel/water-pump-control.json)
