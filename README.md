@@ -1,3 +1,5 @@
-# Water Pump Control
+# good*stuff companion code
 
-Node Red flow to control water pump.
+
+* [Waterpump pump control](./diy-smart-rain-water-barrel/)
+  * [Node-RED flow](./diy-smart-rain-water-barrel/water-pump-control.json)
